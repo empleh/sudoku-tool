@@ -12,7 +12,12 @@
             <tr>
                 @for (int j = 0; j < 9; j++)
                 {
-                    <td class="@(CellClass(i, j) + " " + OverlayClass(i, j))">@(numberGrid[i, j])</td>
+                    int localRow = i;
+                    int localCol = j;
+                    <td class="@(CellClass(i, j) + " " + OverlayClass(i, j))"
+                        @onclick="@(e => GridClicked(localRow, localCol))">
+                        @(numberGrid[i, j])
+                    </td>
                 }
             </tr>
         }
@@ -111,7 +116,7 @@
             { "b", "b", "b", "b", "b", "b", "b", "b", "b" },
             { "b", "b", "b", "b", "b", "b", "b", "b", "b" },
             { "b", "b", "b", "b", "b", "b", "b", "b", "b" },
-            { "b", "b", "b", "b", "e", "b", "b", "b", "b" },
+            { "b", "b", "b", "b", "b", "b", "b", "b", "b" },
             { "b", "b", "b", "b", "b", "b", "b", "b", "b" },
             { "b", "b", "b", "b", "b", "b", "b", "b", "b" },
             { "b", "b", "b", "b", "b", "b", "b", "b", "b" },
@@ -150,7 +155,7 @@
             { "b", "b", "b", "b", "b", "b", "b", "b", "b" }
         };
     }
-    
+
     private void SetOverlayCol()
     {
         extraClassGrid = new string[9, 9]
@@ -182,6 +187,18 @@
                     extraClassGrid[i, j] = "b";
                 }
             }
+        }
+    }
+
+    private void GridClicked(int localRow, int localCol)
+    {
+        if (localRow == 4 && localCol == 4)
+        {
+            extraClassGrid[localRow, localCol] = "e";
+        }
+        else
+        {
+            extraClassGrid[localRow, localCol] = "x";
         }
     }
 
